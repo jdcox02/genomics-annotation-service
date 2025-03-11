@@ -59,5 +59,3 @@ This architecture leverages AWS services to ensure:
 - **Reliability & Scalability**: Built-in retry mechanisms in SQS and Lambda enhance system robustness.
 
 This project demonstrates an efficient, **cloud-based genomics annotation service**, leveraging AWS for optimal performance and cost-effectiveness.
-
-**Note:** This implementation does not include auto-scaling for the annotator or web application instances.
