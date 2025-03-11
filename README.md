@@ -13,7 +13,7 @@ The system supports two user tiers:
 - **Free users**: Can submit annotation jobs, but their results are archived to **AWS Glacier** after a short period.
 - **Premium users**: Have permanent access to their results and can retrieve archived files upon upgrading.
 
-The service is built on **AWS cloud infrastructure**, leveraging **S3, SNS, SQS, Lambda, Step Functions, and Glacier** to create a scalable, cost-effective, and efficient annotation pipeline.
+The service is built on **AWS cloud infrastructure**, leveraging **EC2, S3, SNS, SQS, Lambda, Step Functions, and Glacier** to create a scalable, cost-effective, and efficient annotation pipeline.
 
 ## Infrastructure Overview
 
