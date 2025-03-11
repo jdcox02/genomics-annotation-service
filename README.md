@@ -13,6 +13,13 @@ The system supports two user tiers:
 
 The service is built on **AWS cloud infrastructure**, leveraging **S3, SNS, SQS, Lambda, Step Functions, and Glacier** to create a scalable, cost-effective, and efficient annotation pipeline.
 
+## Infrastructure Overview
+
+The system utilizes **Amazon EC2** instances for hosting different services:
+- **Web instance**: Hosts the web application interface, allowing users to submit jobs and view results.
+- **Annotator instance**: Responsible for retrieving job requests, processing genetic data using **AnnTools**, and storing the results.
+- **Utility instance**: Handles background tasks such as archival, restoration from Glacier, and processing related scripts.
+
 ## Workflow
 
 This section outlines the step-by-step process of how the genomics annotation system works, from job submission to result processing and archival.
@@ -23,14 +30,14 @@ This section outlines the step-by-step process of how the genomics annotation sy
 
 ### Job Processing
 - Job details, including user ID and role, are sent to an **SNS topic** (`joshcox_job_requests`).
-- An **SQS queue** subscribed to this topic holds the message until it is fetched by the annotator instance.
+- An **SQS queue** subscribed to this topic holds the message until it is fetched by the **annotator instance**.
 - The annotator instance retrieves the message, downloads the input file from **S3**, and processes it using **AnnTools**.
 - Results and log files are generated and uploaded to the **S3 bucket** (`gas-results`).
 
 ### Archival for Free Users
 - If the user is **free-tier**, a message is sent to an **SNS topic** (`joshcox_job_results`).
 - An **SQS queue** subscribed to this topic captures the message.
-- A **Step Function** triggers an archival process after a **3-minute delay**, sending the task to an **archival script** running on a utility instance.
+- A **Step Function** triggers an archival process after a **3-minute delay**, sending the task to an **archival script** running on a **utility instance**.
 - The script verifies archival status in **DynamoDB** (`joshcox_annotations` table) before archiving.
 - If the file is archived, it is stored in **AWS Glacier** and removed from **S3**.
 - The **DynamoDB table** is updated with the Glacier **archive ID**.
@@ -59,5 +66,3 @@ This architecture leverages AWS services to ensure:
 - **Reliability & Scalability**: Built-in retry mechanisms in SQS and Lambda enhance system robustness.
 
 This project demonstrates an efficient, **cloud-based genomics annotation service**, leveraging AWS for optimal performance and cost-effectiveness.
-
-**Note:** This implementation does not include auto-scaling for the annotator or web application instances.
