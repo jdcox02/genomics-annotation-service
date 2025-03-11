@@ -5,7 +5,9 @@
 **Note:** This implementation does not include auto-scaling for the annotator or web application instances.
 
 ## Project Overview
-This project is a fully functional **Genomics Annotation Service** that utilizes the **AnnTools** package to analyze and process genetic data submitted by users. Genomics annotation refers to the process of identifying and mapping features within DNA sequences, such as genes, mutations, and functional elements. This service allows users to submit files for annotation, view, and download results through a web interface.
+This project is a fully functional Genomics Annotation Service that utilizes the AnnTools package to analyze and process genetic data submitted by users. Genomics annotation refers to the process of identifying and mapping features within DNA sequences, such as genes, mutations, and functional elements. The service enables users to submit files for annotation, view results, and download them through a web interface.
+
+This project was developed as part of a capstone project for a cloud computing course at the University of Chicago.
 
 The system supports two user tiers:
 - **Free users**: Can submit annotation jobs, but their results are archived to **AWS Glacier** after a short period.
